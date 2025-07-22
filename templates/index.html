@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+ 
+    <form method="POST">
+        <h1>🎯 Custom QR Code Generator</h1>
+        <label>Data/URL:</label>
+        <input type="text" name="data" required><br>
+
+        <label>Fill Color:</label>
+        <input type="text" name="fill_color" value="black" required><br>
+
+        <label>Background Color:</label>
+        <input type="text" name="bg_color" value="white" required><br>
+
+        <label>Border (integer):</label>
+        <input type="number" name="border" value="4" min="1" max="10"><br>
+
+        <label>Version (1-40):</label>
+        <input type="number" name="version" value="1" min="1" max="40"><br>
+
+        <button type="submit">Generate</button>
+    </form>
+
+    {% if qr_filename %}
+    <div class="qr-section">
+        <h2>Your QR Code:</h2>
+        <img src="{{ url_for('static', filename='../generated_qr/' + qr_filename) }}" alt="QR Code"><br>
+        <a href="{{ url_for('download', filename=qr_filename) }}">Download</a>
+    </div>
+    {% endif %}
+</body>
+</html>
